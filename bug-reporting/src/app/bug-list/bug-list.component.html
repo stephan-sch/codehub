@@ -1,0 +1,20 @@
+<ul>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Priority</th>
+      <th>Reporter</th>
+      <th>Date Created</th>
+      <th>Status</th>
+    </tr>
+    <tr *ngFor="let bug of bugList; let i=index">
+      <td>{{bug.title}} </td> 
+      <td>{{bug.priority}} </td>
+      <td>{{bug.reporter}}  </td>
+      <td>{{bug.created}} </td>
+      <td> {{bug.status}} </td>
+    </tr>
+  </table>
+  
+
+</ul>
