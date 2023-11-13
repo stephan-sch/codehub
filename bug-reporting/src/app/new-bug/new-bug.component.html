@@ -1,3 +1,49 @@
-<p>
-  new-bug works!
-</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <label>Title</label>
+    <input type="text" formControlName="title">
+    <div *ngIf="title.hasError('required') && title.touched" style="color: darkred">Title is required</div>
+  </div>
+  <div>
+    <label>Description</label>
+    <input type="text" formControlName="description">
+    <div *ngIf="description.hasError('required') && description.touched" style="color: darkred">Description is required</div>
+  </div>
+  <div>
+    <label>Priority</label>
+    <select name="singleSelect" formControlName="priority">
+      <option value="Minor">Minor</option>
+      <option value="Major">Major</option>
+      <option value="Critical">Critical</option>
+    </select>
+    
+    <div *ngIf="priority.hasError('required') && priority.touched" style="color: darkred">Priority is required</div>
+  </div>
+  <div>
+    <label>Reporter</label>
+    <select name="singleSelect" formControlName="reporter">
+      <option value="QA">QA</option>
+      <option value="PO">PO</option>
+      <option value="DEV">DEV</option>
+    </select>
+    
+    <div *ngIf="reporter.hasError('required') && reporter.touched" style="color: darkred">Reporter is required</div>
+  </div>
+  <div>
+    <label>Status</label>
+    <select name="singleSelect" formControlName="status">
+      <option value="">---Please select---</option>
+      <option value="For review">For review</option>
+      <option value="Done">Done</option>
+      <option value="Rejected">Rejected</option>
+    </select>
+    
+    <div *ngIf="status.hasError('required') && status.touched" style="color: darkred">Status is required</div>
+  </div>
+  <div>
+    <input type="submit" value="Create">
+  </div>
+</form>
+
+<router-outlet></router-outlet>

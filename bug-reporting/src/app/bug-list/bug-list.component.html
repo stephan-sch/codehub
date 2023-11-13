@@ -1,11 +1,11 @@
 <ul>
   <table>
     <tr>
-      <th>Title</th>
-      <th>Priority</th>
-      <th>Reporter</th>
-      <th>Date Created</th>
-      <th>Status</th>
+      <th><a (click)="sortTable('title')">Title</a></th>
+      <th><a (click)="sortTable('priority')">Priority</a></th>
+      <th><a (click)="sortTable('reporter')">Reporter</a></th>
+      <th><a (click)="sortTable('created')">Date Created</a></th>
+      <th><a (click)="sortTable('status')">Status</a></th>
     </tr>
     <tr *ngFor="let bug of bugList; let i=index">
       <td>{{bug.title}} </td> 
@@ -18,3 +18,5 @@
   
 
 </ul>
+
+<router-outlet></router-outlet>

@@ -14,8 +14,15 @@ export class BugListComponent implements OnInit {
 
   constructor(private bugService: BugService) {
  
-    this.bugService.getBugs().subscribe((bugFetched : Bugs) => {
-      this.bugList = bugFetched.bugs;
+    this.bugService.getBugs('').subscribe((bugFetched : Bug[]) => {
+      this.bugList = bugFetched;
+    
+    })
+  }
+
+  sortTable(sortBy: string){
+    this.bugService.getBugs(sortBy).subscribe((bugFetched : Bug[]) => {
+      this.bugList = bugFetched;
     
     })
   }

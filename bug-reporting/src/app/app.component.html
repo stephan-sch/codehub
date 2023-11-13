@@ -1,7 +1,7 @@
-<li [routerLink]="['new-bug']">New Bug</li>
-<div class="item-body">
-  <div class="item-list">
-    <app-bug-list ></app-bug-list>
-  </div>
+<div class="topnav">
+  <a [routerLink]="['bug-list']">Bug list</a>
+  <a [routerLink]="['new-bug']">Create ticket</a>
+
 </div>
+
 <router-outlet></router-outlet>
