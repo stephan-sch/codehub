@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Bug } from 'src/domain/bug';
 import { Bugs } from 'src/domain/bugs';
 import { BugService } from 'src/services/bug.service';
@@ -12,7 +13,7 @@ export class BugListComponent implements OnInit {
   bugList?: Bug[];
  
 
-  constructor(private bugService: BugService) {
+  constructor(private bugService: BugService, private router: Router) {
  
     this.bugService.getBugs('').subscribe((bugFetched : Bug[]) => {
       this.bugList = bugFetched;
@@ -30,5 +31,8 @@ export class BugListComponent implements OnInit {
   ngOnInit() {
   }
 
+  editTicket(bugId: string){
+    this.router.navigate(['bug' , bugId ])
+  }
 
 }

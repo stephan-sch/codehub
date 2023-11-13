@@ -6,13 +6,15 @@
       <th><a (click)="sortTable('reporter')">Reporter</a></th>
       <th><a (click)="sortTable('created')">Date Created</a></th>
       <th><a (click)="sortTable('status')">Status</a></th>
+      <th>Action</th>
     </tr>
     <tr *ngFor="let bug of bugList; let i=index">
       <td>{{bug.title}} </td> 
       <td>{{bug.priority}} </td>
       <td>{{bug.reporter}}  </td>
-      <td>{{bug.created}} </td>
+      <td>{{bug.created | date }} </td>
       <td> {{bug.status}} </td>
+      <td> <button (click)="editTicket(bug.id)">Edit</button></td>
     </tr>
   </table>
   

@@ -6,7 +6,12 @@ import { NewBugComponent } from './new-bug/new-bug.component';
 
 const routes: Routes = [
   {
-    path: "new-bug",
+    path: "bug",
+
+    component: NewBugComponent,
+  },
+  {
+    path: "bug/:bugId",
 
     component: NewBugComponent,
   },

@@ -30,7 +30,16 @@ export class BugService {
 
   saveBug(form: FormData) {
     let baseUrl= "http://localhost:3000/bugs";
-    
     return this.http.post(baseUrl, form);
+  }
+
+  updateBug(form: FormData, bugId: string) {
+    let baseUrl= "http://localhost:3000/bugs/" + bugId;
+    return this.http.put(baseUrl, form);
+  }
+
+  getBug(bugId: string){
+    let baseUrl= "http://localhost:3000/bugs/" + bugId;
+    return this.http.get<Bug>(baseUrl);
   }
 }

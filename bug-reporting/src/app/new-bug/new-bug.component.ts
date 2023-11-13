@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BugService } from 'src/services/bug.service';
 
 @Component({
@@ -10,10 +10,10 @@ import { BugService } from 'src/services/bug.service';
 })
 export class NewBugComponent implements OnInit {
 
-
+  bugId?: string;
   form!: FormGroup;
 
-  constructor(private bugService: BugService, private router: Router) {
+  constructor(private bugService: BugService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -28,7 +28,18 @@ export class NewBugComponent implements OnInit {
         this.form.controls['status'].updateValueAndValidity();
       }
     });
-  
+
+    this.initBugValues();
+
+  }
+
+  private initBugValues() {
+    this.bugId = this.route.snapshot.params['bugId'];
+    if (this.bugId !== undefined) {
+      this.bugService.getBug(this.bugId).subscribe(response => {
+        this.form.patchValue(response);
+      });
+    }
   }
 
   private setFormInitialValues() {
@@ -67,17 +78,30 @@ export class NewBugComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      // send data to the backend
+      if (this.bugId === undefined) {
+        // Create new entry
+        this.bugService.saveBug(this.form.value).subscribe({
+          next: () => {
+            console.log("Ticket saved");
+            this.router.navigate(['bug-list']);
+          },
+          error: (error) => {
+            console.log(error);
+          }
+        });
+      } else {
+        // Update existing entry
+        this.bugService.updateBug(this.form.value, this.bugId).subscribe({
+          next: () => {
+            console.log("Ticket updated");
+            this.router.navigate(['bug-list']);
+          },
+          error: (error) => {
+            console.log(error);
+          }
+        });
 
-      this.bugService.saveBug(this.form.value).subscribe({
-        next: () => {
-          console.log("Ticket saved");
-          //this.router.navigate(['bug-list']);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+      }
 
     } else {
 
